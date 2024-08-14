@@ -14,6 +14,7 @@ class Pembayaran extends Model
     protected $fillable = [
         'pelanggan_id',
         'nominal',
+        'tanggal',
     ];
 
     public function pelanggan()

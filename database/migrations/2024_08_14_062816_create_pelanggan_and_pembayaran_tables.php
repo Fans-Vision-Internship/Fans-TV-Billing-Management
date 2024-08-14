@@ -19,6 +19,7 @@ class CreatePelangganAndPembayaranTables extends Migration
             $table->id();
             $table->unsignedBigInteger('pelanggan_id');
             $table->integer('nominal');
+            $table->date('tanggal');
             $table->timestamps();
 
             // Relasi ke tabel pelanggan
