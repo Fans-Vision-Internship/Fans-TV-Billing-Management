@@ -32,6 +32,12 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
+                <li class="sidebar-item {{ Request::is('user*') ? 'active' : '' }}">
+                    <a href="/users" class='sidebar-link'>
+                        <i class="bi bi-person-lines-fill"></i>
+                        <span>User Management</span>
+                    </a>
+                </li>
                 <!-- Data Pelanggan Section -->
                 <li class="sidebar-item {{ Request::is('pelanggan*') ? 'active' : '' }}">
                     <a href="/pelanggan" class='sidebar-link'>
@@ -49,10 +55,10 @@
                 </li>
 
                 <!-- Riwayat Pembayaran Section -->
-                <li class="sidebar-item {{ Request::is('riwayat-pembayaran*') ? 'active' : '' }}">
-                    <a href="/riwayat-pembayaran" class='sidebar-link'>
+                <li class="sidebar-item {{ Request::is('laporan*') ? 'active' : '' }}">
+                    <a href="/laporan" class='sidebar-link'>
                         <i class="bi bi-clock-history"></i>
-                        <span>Riwayat Pembayaran</span>
+                        <span>Laporan Pembayaran</span>
                     </a>
                 </li>
 
