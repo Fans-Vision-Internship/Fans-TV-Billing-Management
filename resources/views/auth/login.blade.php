@@ -21,9 +21,7 @@
         <div class="row h-100">
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
-                    <div class="auth-logo">
-                        <a href="{{ url('/') }}"><img src="{{ asset('logo.png') }}" alt="Logo" style="width: 80%; height: auto;"></a>
-                    </div>
+
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Silahkan masukkan email dan password anda agar dapat mengakses sistem ini.</p>
 
@@ -64,7 +62,7 @@
             <!-- Right Side with Image -->
             <div class="col-lg-7 d-none d-lg-block">
                 <div id="auth-right" style="background-color: white; display: flex; align-items: center; justify-content: center;">
-                    <img src="{{ asset('login.svg') }}" alt="Logo" style="width: 70%">
+                    <img src="{{ asset('images/login.svg') }}" alt="Logo" style="width: 70%">
                 </div>
             </div>
         </div>

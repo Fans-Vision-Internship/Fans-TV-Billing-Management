@@ -12,7 +12,7 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>SI Gaji</h3>
+                    <h3>Fans Vision</h3>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
                                                         <i data-feather="x"></i>
                                                     </button>
                                                 </div>
-                                                <form action="{{ route('users.update', $user->id) }}" method="POST">
+                                                <form id="editUserForm{{ $user->id }}" action="{{ route('users.update', $user->id) }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="modal-body">
@@ -75,7 +75,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="password">Password (Kosongkan jika tidak diubah)</label>
-                                                            <input type="password" class="form-control" id="password" name="password">
+                                                            <input type="password" class="form-control" id="password{{ $user->id }}" name="password">
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -92,7 +92,6 @@
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
-                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -113,7 +112,7 @@
                         <i data-feather="x"></i>
                     </button>
                 </div>
-                <form action="{{ route('users.store') }}" method="POST">
+                <form id="tambahUserForm" action="{{ route('users.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -139,7 +138,39 @@
     </div>
 
     @include('layouts.footer')
+
+
     <script>
+
+        // Validasi form Tambah User
+        document.getElementById('tambahUserForm').addEventListener('submit', function(event) {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            // Validasi field kosong
+            if (!name || !email || !password) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Semua field harus diisi.'
+                });
+                return;
+            }
+
+            // Validasi panjang password
+            if (password.length < 6) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Password harus memiliki minimal 6 karakter.'
+                });
+                return;
+            }
+
+        });
         @if(session('success'))
         Swal.fire({
             title: 'Berhasil!',
@@ -148,7 +179,49 @@
             confirmButtonText: 'OK'
         });
         @endif
-    
+        // Validasi form Edit User
+        @foreach ($users as $user)
+        document.getElementById('editUserForm{{ $user->id }}').addEventListener('submit', function(event) {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password{{ $user->id }}').value;
+
+            // Validasi field kosong
+            if (!name || !email) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Nama dan Email harus diisi.'
+                });
+                return;
+            }
+
+            // Validasi panjang password jika diisi
+            if (password && password.length < 6) {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Password harus memiliki minimal 6 karakter.'
+                });
+                return;
+            }
+
+            // Validasi email yang sama kecuali milik user yang sedang diedit
+            if (existingEmails.includes(email) && email !== '{{ $user->email }}') {
+                event.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Email sudah digunakan.'
+                });
+                return;
+            }
+        });
+        @endforeach
+
+        // Konfirmasi penghapusan user dengan SweetAlert
         function confirmDelete(url) {
             Swal.fire({
                 title: 'Anda yakin?',
