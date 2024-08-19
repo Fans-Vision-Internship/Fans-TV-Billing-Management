@@ -26,6 +26,6 @@ Route::get('/export-pdf', [laporanController::class, 'exportPDF'])->name('export
 
 
 
-Route::get('/home', [PembayaranController::class, 'index'])->name('pembayaran.create');
+Route::get('/home', [PelangganController::class, 'index']);
 Route::resource('users', UserController::class);
 });

@@ -8,6 +8,9 @@ use Dompdf\Options;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 class laporanController extends Controller
 {
@@ -54,22 +57,33 @@ class laporanController extends Controller
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        $sheet->setCellValue('A1', 'Nama');
-        $sheet->setCellValue('B1', 'Wilayah');
-        $sheet->setCellValue('C1', 'Kewajiban Iuran');
-        $sheet->setCellValue('D1', 'Januari');
-        $sheet->setCellValue('E1', 'Februari');
-        $sheet->setCellValue('F1', 'Maret');
-        $sheet->setCellValue('G1', 'April');
-        $sheet->setCellValue('H1', 'Mei');
-        $sheet->setCellValue('I1', 'Juni');
-        $sheet->setCellValue('J1', 'Juli');
-        $sheet->setCellValue('K1', 'Agustus');
-        $sheet->setCellValue('L1', 'September');
-        $sheet->setCellValue('M1', 'Oktober');
-        $sheet->setCellValue('N1', 'November');
-        $sheet->setCellValue('O1', 'Desember');
+        // Header Titles
+        $headers = ['Nama', 'Wilayah', 'Kewajiban Iuran', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        $sheet->fromArray($headers, null, 'A1');
 
+        // Apply Styles to Headers
+        $headerStyle = [
+            'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '4CAF50'],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['rgb' => '000000'],
+                ],
+            ],
+        ];
+
+        // Apply Header Style
+        $sheet->getStyle('A1:O1')->applyFromArray($headerStyle);
+
+        // Fill Data
         $row = 2;
         foreach ($pelanggan as $item) {
             $sheet->setCellValue('A' . $row, $item->nama);
@@ -88,6 +102,14 @@ class laporanController extends Controller
             $sheet->setCellValue('N' . $row, optional($item->pembayaran->first())->november);
             $sheet->setCellValue('O' . $row, optional($item->pembayaran->first())->desember);
             $row++;
+        }
+
+        // Apply Borders to Data Cells
+        $sheet->getStyle('A2:O' . ($row - 1))->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+
+        // Auto Width for All Columns
+        foreach (range('A', 'O') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
 
         $writer = new Xlsx($spreadsheet);
