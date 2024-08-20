@@ -13,19 +13,30 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Laporan Pembayaran Pelanggan</h3>
+                    
                 </div>
             </div>
         </div>
 
         <section class="section">
             <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Data Pelanggan</h5>
-                    <a href="{{ route('export.excel') }}" class="btn btn-success">Export to Excel</a>
-                    <a href="{{ route('export.pdf') }}" class="btn btn-danger">Export to PDF</a>
+                <div class="card-header mb-0">
+                    <h5 class="card-title mb-2">Data Pelanggan</h5>
+                    <a href="{{ route('export.excel', ['year' => $year]) }}" class="btn btn-success mb-2">Export to Excel</a>
+                    <a href="{{ route('export.pdf', ['year' => $year]) }}" class="btn btn-danger mb-2">Export to PDF</a>
+                    <form method="GET" action="{{ route('laporan.pelanggan') }}">
+                        <div class="form-group">
+                            <label for="year">Filter Tahun:</label>
+                            <select name="year" id="year" class="form-control" onchange="this.form.submit()">
+                                @for($i = date('Y'); $i >= date('Y') - 10; $i--)
+                                    <option value="{{ $i }}" {{ $year == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </form>
 
                 </div>
-                <div class="card-body">
+                <div class="card-body mt-0">
                     <table class="table table-striped" id="table1">
                         <thead>
                             <tr>
