@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-    <h2>Laporan Pembayaran Pelanggan</h2>
+    <h2>Laporan Pembayaran Pelanggan Tahun {{ $year }}</h2>
     <table>
         <thead>
             <tr>
