@@ -115,7 +115,7 @@
 
     .signature-with-stamp .stamp {
         position: absolute;
-        top: 0;
+        top: 20px;
         left: 70%;
         transform: translate(-50%, -50%);
         width: 150px; /* Sesuaikan ukuran stempel */
@@ -204,10 +204,10 @@
 
             <div class="signature">
                 <div style="text-align: center;">
-                    <p><strong>Penerima <br><span style="text-decoration: underline;">Silvyana Claudya</span></strong></p>
+                    <p><strong>Penerima </strong></p>
                     <div class="signature-with-stamp">
-                        <img src="{{ public_path('images/logottd.png') }}" alt="Stempel" class="stamp">
-                        <p><strong>Admin</strong></p>
+                        <img src="{{ public_path('images/logodanttd.png') }}" alt="Stempel" class="stamp">
+                        <p><strong><span style="text-decoration: underline;">Silvyana Claudya</span><br> Admin</strong></p>
                     </div>
                 </div>
                 <div style="text-align: center;">
