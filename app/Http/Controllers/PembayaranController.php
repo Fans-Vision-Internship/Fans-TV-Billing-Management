@@ -3,9 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
 use App\Models\Pembayaran;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PembayaranController extends Controller
 {
