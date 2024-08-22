@@ -3,7 +3,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo px-2 mt-1">
-                    <a href=""><img src="{{ asset('images/logo.png') }}" alt="Logo" srcset="" style="width: 100px; height: auto;"></a>
+                    <a href=""><img src="{{ asset('images/logo1.png') }}" alt="Logo" srcset="" style="width: 100px; height: auto;"></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                     <!-- Theme Toggle Icons -->

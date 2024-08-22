@@ -21,7 +21,9 @@
         <div class="row h-100">
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
-
+                    <div class="auth-logo mb-3">
+                        <a href="{{ url('/') }}"><img src="{{ asset('images/logo1.png') }}" alt="Logo" style="width: 25%; height: auto;"></a>
+                    </div>
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Silahkan masukkan email dan password anda agar dapat mengakses sistem ini.</p>
 
