@@ -116,7 +116,7 @@
     .signature-with-stamp .stamp {
         position: absolute;
         top: 20px;
-        left: 70%;
+        left: 30%;
         transform: translate(-50%, -50%);
         width: 150px; /* Sesuaikan ukuran stempel */
         z-index: -1; /* Letakkan stempel di belakang teks */
@@ -125,7 +125,7 @@
     .signature-with-stamp .signed-name {
         position: relative;
         z-index: 1; /* Letakkan teks di depan stempel */
-        margin-top: 50px; /* Tambahkan ruang agar stempel tidak menutupi teks */
+        margin-top: 30px; /* Tambahkan ruang agar stempel tidak menutupi teks */
     }
     </style>
 </head>
@@ -135,7 +135,7 @@
         <div class="header">
             <table style="width: 100%; table-layout: fixed; border: none; margin-bottom: 0px;">
                 <tr>
-                    <td style="width: 20%; vertical-align: top; border: none;">
+                    <td style="width: 20%; vertical-align: left-top; border: none;">
                         <img src="{{ public_path('images/logo.png') }}" alt="Logo" style="max-width: 100%;">
                     </td>
                     <td style="width: 80%; text-align: center; vertical-align: middle; border: none;">
@@ -206,13 +206,13 @@
                 <div style="text-align: center;">
                     <p><strong>Penerima </strong></p>
                     <div class="signature-with-stamp">
-                        <img src="{{ public_path('images/logodanttd.png') }}" alt="Stempel" class="stamp">
-                        <p><strong><span style="text-decoration: underline;">Silvyana Claudya</span><br> Admin</strong></p>
+                        <img src="{{ public_path('images/farida.png') }}" alt="Stempel" class="stamp">
+                        <p><strong><span style="text-decoration: underline;">Farida Herlina</span><br> Admin</strong></p>
                     </div>
                 </div>
                 <div style="text-align: center;">
-                    <p><strong>Pembayar <br><br><br></strong></p>
-                    <p class="signed-name" style="text-decoration: underline;"><strong>{{ $pelanggan->nama }}</strong></p>
+                    <p><strong>Pembayar <br><br></strong></p>
+                    <p><strong><span  class="signed-name" style="text-decoration: underline;">{{ $pelanggan->nama }}</span><br> &nbsp;</strong></p>
                 </div>
             </div>
             
